@@ -1,0 +1,801 @@
+{
+  "schemaVersion": 1,
+  "version": "0.7.26",
+  "pluginSha256": "592c9bad6bffb689cee506580b9dc89016292734efe31d6314f7be554f55f1de",
+  "basePluginSha256": null,
+  "runtimeBasePluginSha256": null,
+  "compilerSdk": "10.0.300",
+  "buildMode": "Full",
+  "sourceScope": "Every C# compiler input for the matching DLL, unchanged. Runtime artwork is distributed separately.",
+  "sources": [
+    {
+      "path": "src/Resolute/AnimationTrial.cs",
+      "bytes": 9538,
+      "sha256": "548a635a71526d02ea00611fd76246ad5b1d6655f01ec92c2aa42847e1d3dd2f"
+    },
+    {
+      "path": "src/Resolute/AssembledPreview.cs",
+      "bytes": 3809,
+      "sha256": "1fe820a84bee54f5cbc8126be191d7097c4a37be139972ee88fd537f39d8b91f"
+    },
+    {
+      "path": "src/Resolute/AssemblyInfo.cs",
+      "bytes": 160,
+      "sha256": "2ee059f929a41878253b9d2e38207f1340b69dd2d22f17b47d69549a24b4d68d"
+    },
+    {
+      "path": "src/Resolute/Audit.cs",
+      "bytes": 21011,
+      "sha256": "1a4235ad84dabd8f4d8ad8a171e3002b39c9d640cc97a76e3a9e5bd99ad92f30"
+    },
+    {
+      "path": "src/Resolute/CarrierIntegration.cs",
+      "bytes": 13951,
+      "sha256": "8ec4412cb180150061ee2cc2d03cf36115afe8a64ed29c08c2bd9a0a44f34044"
+    },
+    {
+      "path": "src/Resolute/CarrierRecovery.cs",
+      "bytes": 3254,
+      "sha256": "fb722c0ab65b7d5cdb6330bba42cc1015a5a5d58a5ae00125d71513f51ae3770"
+    },
+    {
+      "path": "src/Resolute/CarrierTrial.cs",
+      "bytes": 50877,
+      "sha256": "4a92a7de9c41ba3cba4dfe82dbc4c4560693dda4eb331d74df6179b6a08f2e3c"
+    },
+    {
+      "path": "src/Resolute/DamagePerformanceTrial.cs",
+      "bytes": 60157,
+      "sha256": "15b1ed023f68e0fc2d181f82424f0a1300d48351c47b65bad2f65d4cb15145a8"
+    },
+    {
+      "path": "src/Resolute/DamageVisualTrial.cs",
+      "bytes": 51518,
+      "sha256": "4a82fa779ea0e9a329290ce9b527531fab546fb154506ff63c640a70641855ca"
+    },
+    {
+      "path": "src/Resolute/EditorPoseTrial.cs",
+      "bytes": 67127,
+      "sha256": "a9866cdd3e95fea5cdccdc62788591c8670fbc79227533daa40389d36b293dd8"
+    },
+    {
+      "path": "src/Resolute/EncyclopediaIntegration.cs",
+      "bytes": 5145,
+      "sha256": "5174d40f57cd758ddbc6361294bb182db7788d3afb5cac5b77e9b3671eaf246e"
+    },
+    {
+      "path": "src/Resolute/EncyclopediaTrial.cs",
+      "bytes": 33069,
+      "sha256": "9f08994f0ce903afcfccb4c97b79d63fff8809269612d854d0308e416402760c"
+    },
+    {
+      "path": "src/Resolute/InterceptorFlightPolicy.cs",
+      "bytes": 1928,
+      "sha256": "024b0bed272b5fb195bb8bdb3ef24f26d5c521b3bbac9211b22405c33a0bcc60"
+    },
+    {
+      "path": "src/Resolute/MissileImpactTrial.cs",
+      "bytes": 10348,
+      "sha256": "80aa29a060b5518cb4b4fb015291af589f4001c2ecd2ebf3573a031532010f19"
+    },
+    {
+      "path": "src/Resolute/MissileVisuals.cs",
+      "bytes": 4859,
+      "sha256": "21a57313cad2a2a332a0854eb56c6724c42ef84062ae41be0d57b7c62026f662"
+    },
+    {
+      "path": "src/Resolute/MissileVisualTrial.cs",
+      "bytes": 22911,
+      "sha256": "fe92634a8c7476911c09923aa813a0ae20e4095c28ed171d23abaaae5da8b2be"
+    },
+    {
+      "path": "src/Resolute/MissionTrial.cs",
+      "bytes": 71416,
+      "sha256": "8ff711c65843b817659294ad9d0874e1a106df8dbff8545b88e796c541f30162"
+    },
+    {
+      "path": "src/Resolute/NaturalArmament.cs",
+      "bytes": 23484,
+      "sha256": "c9b8705261f816067885a9011cc99c5dba815b976be5c07d21074aea2af62f68"
+    },
+    {
+      "path": "src/Resolute/NaturalBallisticReferenceTrial.cs",
+      "bytes": 5077,
+      "sha256": "d4ddde152decf1688557a00f9ab28bbdef46d6cd6674308a0037a9a1f6574f09"
+    },
+    {
+      "path": "src/Resolute/NaturalBallisticSelection.cs",
+      "bytes": 12341,
+      "sha256": "d9b9097c0122f1c1860666d602a77f7c897c73f0859c8d67b665edf39686b7c9"
+    },
+    {
+      "path": "src/Resolute/NaturalCruiseBehaviorTrial.cs",
+      "bytes": 87865,
+      "sha256": "f3f3179419fccd24781fc1a4c295b9b35cc717ab6ef7603f402fbe007cb712e5"
+    },
+    {
+      "path": "src/Resolute/NaturalCruiseController.cs",
+      "bytes": 15274,
+      "sha256": "397e1377bc934dec602374512bfbb74f2749a3022de6f31028e4c9b5773011d0"
+    },
+    {
+      "path": "src/Resolute/NaturalCruiseDatalink.cs",
+      "bytes": 7469,
+      "sha256": "44d22769e2a747b97482e40e83e45a5151c9836629330af3a65e5bcbad9f327e"
+    },
+    {
+      "path": "src/Resolute/NaturalCruiseGuidance.cs",
+      "bytes": 89776,
+      "sha256": "3abdf3600094b2568f8ebebc6efe4474d7d3802b0b1a95c03642ee52f76546af"
+    },
+    {
+      "path": "src/Resolute/NaturalCruiseNativeExperiment.cs",
+      "bytes": 7712,
+      "sha256": "474ceadacbf6d51f8977c888d9de5682f02d546ee0d55047ec28e34ab3ad8132"
+    },
+    {
+      "path": "src/Resolute/NaturalCruiseTactics.cs",
+      "bytes": 14218,
+      "sha256": "86ef51cb16217c245c7653a3fafce5057b3b478aa70772e0c3a06b297601988c"
+    },
+    {
+      "path": "src/Resolute/NaturalDartLaunch.cs",
+      "bytes": 10259,
+      "sha256": "dddbb5230fda7b4224147c6e505560f6222f1a46e79c44dd08d0b699ab3b28b5"
+    },
+    {
+      "path": "src/Resolute/NaturalExoInfraredSeeker.cs",
+      "bytes": 9084,
+      "sha256": "b5153f2b60308b3157828909253d7a4e10ff4315a4ff96e6e92e60336fbda59f"
+    },
+    {
+      "path": "src/Resolute/NaturalExoRobustnessTrial.cs",
+      "bytes": 45743,
+      "sha256": "a76051a27e85deec9de40c895ed1a3f23234840c87b65b0528ec55ed7c8544d0"
+    },
+    {
+      "path": "src/Resolute/NaturalFinDeployment.cs",
+      "bytes": 2658,
+      "sha256": "904a7f00d11fc5e61b80a0cfa3aad7513f15ee4c53226f23a1a332fcfe64dd62"
+    },
+    {
+      "path": "src/Resolute/NaturalFireControlAudit.cs",
+      "bytes": 12819,
+      "sha256": "39442ffbe40591bdaa2f22ee4c3e947520f7a064edad3fb012df53ab22ad9026"
+    },
+    {
+      "path": "src/Resolute/NaturalFireControlGroups.cs",
+      "bytes": 9272,
+      "sha256": "e7cb46885d3007f54a38184bfa42431d78fa1a6e3de71dad9db0dc656ef728d7"
+    },
+    {
+      "path": "src/Resolute/NaturalFragmentWarhead.cs",
+      "bytes": 2028,
+      "sha256": "58425fa5048b7c8669f61551bc481e8d1e79639b619c608fd23449bc26f977af"
+    },
+    {
+      "path": "src/Resolute/NaturalLaunchDiagnostics.cs",
+      "bytes": 9401,
+      "sha256": "173da12ac1e4661a9203c71de1ffd5852484b6a64fdb1dc36ee74cad838c026c"
+    },
+    {
+      "path": "src/Resolute/NaturalLoftGuidance.cs",
+      "bytes": 20726,
+      "sha256": "ad42a7daaff6a81a413c84226890a8946fd38dd6ab46769eb75574e76cd837df"
+    },
+    {
+      "path": "src/Resolute/NaturalLostTargetTerrain.cs",
+      "bytes": 1655,
+      "sha256": "e93349f330dc9b956b6ebc2114045ccae6f54a95c1b837221bfed029ba37b2ed"
+    },
+    {
+      "path": "src/Resolute/NaturalMissileDiagnostics.cs",
+      "bytes": 11320,
+      "sha256": "c7874685e1c245eaa9d7d9f9ad496a5fa054ad5164e367bdca72a9310a4f5dfd"
+    },
+    {
+      "path": "src/Resolute/NaturalMissileTargeting.cs",
+      "bytes": 20934,
+      "sha256": "e8cca88bde0f40c62c41b6d7e5aad3a67cbd8c2d5512ba598f537ce4a6da7761"
+    },
+    {
+      "path": "src/Resolute/NaturalMissileTargetingTrial.cs",
+      "bytes": 38872,
+      "sha256": "38193c76f757d8ad65eba295b593527772de65b9b76dfa9477e3452675f58562"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeAero.cs",
+      "bytes": 5214,
+      "sha256": "a0f15a50d52c0fe96d1f8ae5593afbf8d5a7ebfa974e2f9555167aa58cf61203"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeAreaSearch.cs",
+      "bytes": 4159,
+      "sha256": "e5876c4c7ebc57f03ea02d8edc7ad58f79a3ae45e17907bae695919654277e62"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeClimbDiagnostics.cs",
+      "bytes": 7281,
+      "sha256": "1fcb8a789aaf91ff9e0eac10d7ee90ab1831b2dc06997e0dc259b710e014c187"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeCoMovingCollision.cs",
+      "bytes": 9377,
+      "sha256": "15930322c94561452ad7a1dc305ad0f25bba5fcada057d02547239f7f4ef7eca"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeCountermeasures.cs",
+      "bytes": 27267,
+      "sha256": "0f39c40bd344bf76d847d7455a7385e4934ae0d3c0b8f6dab6c5b30ce916fcf4"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeFormation.cs",
+      "bytes": 18815,
+      "sha256": "8d4fe43cf25270e7c6de10b3ea3ddc7bd09e2686603e9ce357436686c4931d95"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeGroupTargeting.cs",
+      "bytes": 37362,
+      "sha256": "4ff29abac9b1da711a6ce95c3b90973b7ca5aae0b093f6d54e039be6033c68ac"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeObservedThreat.cs",
+      "bytes": 9677,
+      "sha256": "7e42b3dd51a9afc7c6c800f9094efe17780d3d6ece346808022d12ddbd1162ab"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeOffensiveEcm.cs",
+      "bytes": 15466,
+      "sha256": "4cd445b9609ba26d0a2e26ad003c2fa0f1881e4b59d15869930b8ba6d8c6b182"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeStatus.cs",
+      "bytes": 2426,
+      "sha256": "2aeda15b41d0b14cc96de20f6e714001050f813a52b874ca85d48dbb0268ec73"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeTerminalAcceleration.cs",
+      "bytes": 6272,
+      "sha256": "1f77f50e7d5de9f211df6db3fe341ff31dfb6d34d63cccb7741eefc60f3c1756"
+    },
+    {
+      "path": "src/Resolute/NaturalPikeThreat.cs",
+      "bytes": 1656,
+      "sha256": "3fd969716c1358d6484254dd00e6abb731444a590ca86b0d6437dce6880a81a9"
+    },
+    {
+      "path": "src/Resolute/NaturalRailgunAimTrial.cs",
+      "bytes": 9503,
+      "sha256": "77c151d84c6ab63eacdc92da43b052740c66d177c13a47d8f1506f5ef69ddf57"
+    },
+    {
+      "path": "src/Resolute/NaturalRcsPlume.cs",
+      "bytes": 5350,
+      "sha256": "3ab28cb5159a0e404e01e0331ce20ae03949f50d8879c44b9c8b7d14ca5bd302"
+    },
+    {
+      "path": "src/Resolute/NaturalRcsSurfaceDetails.cs",
+      "bytes": 5737,
+      "sha256": "087ddc5a08735b8316352ff9f556a50b8e14291e71f1037942120541bf68dc08"
+    },
+    {
+      "path": "src/Resolute/NaturalReactionControl.cs",
+      "bytes": 16072,
+      "sha256": "856ec31b4c72f86d48447f6c46b27edbe3d51f4975e3ba560a8515cc16f3d655"
+    },
+    {
+      "path": "src/Resolute/NaturalSpearBooster.cs",
+      "bytes": 14775,
+      "sha256": "15a10ce7bb503640ab1709f01201e654e985b1a9f164f8dd579eaceff5b09530"
+    },
+    {
+      "path": "src/Resolute/NaturalSpearFlight.cs",
+      "bytes": 7893,
+      "sha256": "9cb1d4707a1929585e7a9d207abaccea0d020a10f6ed9b90baf35cdef43854d7"
+    },
+    {
+      "path": "src/Resolute/NaturalSpearLaunchBearing.cs",
+      "bytes": 5571,
+      "sha256": "034e703a0f404fe4828af43beaeaa3ec953f7681119e1e173b53c51e6aeeaa02"
+    },
+    {
+      "path": "src/Resolute/NaturalSpentMissileCollision.cs",
+      "bytes": 703,
+      "sha256": "a58dcca53849d251a5c43a7468c058b7f791ca7bd7387765b2a3e26d9c005335"
+    },
+    {
+      "path": "src/Resolute/NaturalSurfaceRadarVisibility.cs",
+      "bytes": 3051,
+      "sha256": "ec473753a7e5da2e7b35b8c90a37de1f9bc9366fd09a21ffec65fffa42819d70"
+    },
+    {
+      "path": "src/Resolute/NaturalSurfaceSalvo.cs",
+      "bytes": 4626,
+      "sha256": "29f11d410f4dd726a9c4da13a8910ad28c1f5d4f5a981f05c0887703fead430a"
+    },
+    {
+      "path": "src/Resolute/NaturalUnarmedImpact.cs",
+      "bytes": 1686,
+      "sha256": "38fa8eccc46a451882330b919ae4ee2914f895b2f0ec1bd40384a8de4a005bb5"
+    },
+    {
+      "path": "src/Resolute/NaturalVlsLayoutAudit.cs",
+      "bytes": 3676,
+      "sha256": "69c6c073a4d0723ed86348ddc80bc584784cf3a2ae46b7838bab4e878f1b5609"
+    },
+    {
+      "path": "src/Resolute/NaturalWeaponAudit.cs",
+      "bytes": 28759,
+      "sha256": "3bfe300764446c6db36a54dac7705b3fe7e5f5474403fbded34b0f6f59dda66c"
+    },
+    {
+      "path": "src/Resolute/NaturalWeaponBehaviorTrial.cs",
+      "bytes": 24745,
+      "sha256": "d5eb980d8033fb8ea1511ca45149d5b7b93f4bafad6c5df75fa1c101b323f979"
+    },
+    {
+      "path": "src/Resolute/NaturalWeaponEffects.cs",
+      "bytes": 30648,
+      "sha256": "2b06cab73bd5b971fe5e1aa56e1a3e4024eea17c4e3adeb23762e1dd7cc59dab"
+    },
+    {
+      "path": "src/Resolute/NaturalWeapons.cs",
+      "bytes": 75776,
+      "sha256": "d50e03af4d8b1609e40690b95dfab083bd8d86dcdb1d839670512503b1e14f90"
+    },
+    {
+      "path": "src/Resolute/NaturalWeaponsTrial.cs",
+      "bytes": 138209,
+      "sha256": "c6e88c0d26b5169143ed43861bc4e12f25719274a17f02fa8f57824d6a0601ff"
+    },
+    {
+      "path": "src/Resolute/NavalMaterials.cs",
+      "bytes": 14251,
+      "sha256": "5b0e433c0661ac142d884ff3ac3f5ab145a2cf6e255b02640fa228b6cb7cf224"
+    },
+    {
+      "path": "src/Resolute/PerformanceTrial.cs",
+      "bytes": 18689,
+      "sha256": "66262f20717dfd04bac036e7efa52c3a90cc4bbb8c67c263a9060d9a004a4f69"
+    },
+    {
+      "path": "src/Resolute/PikeApproachReservation.cs",
+      "bytes": 8258,
+      "sha256": "343d704c23402c3f4142ef711733b16586b4d9ff30a49ea4310545d1c4cf666d"
+    },
+    {
+      "path": "src/Resolute/PikeAreaSearchPolicy.cs",
+      "bytes": 983,
+      "sha256": "4e6c0447246baaea5492d4b7123a6f9b483912411729edfb57b11c9035c29e57"
+    },
+    {
+      "path": "src/Resolute/PikeCohortPolicy.cs",
+      "bytes": 6444,
+      "sha256": "6650002634d25ca1420b6640b3763278e2645b66f256972bdbcb7bd6d151e8f7"
+    },
+    {
+      "path": "src/Resolute/PikeCountermeasureNetworking.cs",
+      "bytes": 5722,
+      "sha256": "eb1fadde1b685f547103b1d534b947d02367f14f2ea1ac9e903922de0e5078c5"
+    },
+    {
+      "path": "src/Resolute/PikeCountermeasureSchedule.cs",
+      "bytes": 5412,
+      "sha256": "68b5c6ac02befad6c80a07998ba3354bb1a30a464c8277483687ebd1ebe189e4"
+    },
+    {
+      "path": "src/Resolute/PikeEcmGate.cs",
+      "bytes": 896,
+      "sha256": "0e928bc31e3f92fc5f18274b017755cd464e876a56035e9de6aaf756ad96fe6c"
+    },
+    {
+      "path": "src/Resolute/PikeEvasionPolicy.cs",
+      "bytes": 2557,
+      "sha256": "19be9edba1aac1106b22634a65eb194136a601a8262e132a33b7abc545107422"
+    },
+    {
+      "path": "src/Resolute/PikeFinalCorrection.cs",
+      "bytes": 2108,
+      "sha256": "a888ab7f0cacb2583f4530dbe8e01a5d81912913e7b9a870545750528a76d2f1"
+    },
+    {
+      "path": "src/Resolute/PikeFlightProfile.cs",
+      "bytes": 3106,
+      "sha256": "40fcb09f104fca2724328f0ca561bee7eb7934e136373037f8947d60e62adb8f"
+    },
+    {
+      "path": "src/Resolute/PikeFormationFlightPolicy.cs",
+      "bytes": 4461,
+      "sha256": "d636a8678eb59dde3c4f3d304a546f2be054ef240751ce345ae4727ea7d365c9"
+    },
+    {
+      "path": "src/Resolute/PikeGroupSeeker.cs",
+      "bytes": 9839,
+      "sha256": "7bd8c8b6b0c156d365bf1b4310e7d4c7354d9cf681a17827c45aa0496de709f2"
+    },
+    {
+      "path": "src/Resolute/PikeGroupTargetingPolicy.cs",
+      "bytes": 13005,
+      "sha256": "9dfe24486e42e9f23dad54649ceb7f50b596bac201881cf737028190144b17f9"
+    },
+    {
+      "path": "src/Resolute/PikeNavigationObstacles.cs",
+      "bytes": 12030,
+      "sha256": "792083a393fde9b7aa49f380a6ef5edb0935d19f66027750c31a1891e68ee5b2"
+    },
+    {
+      "path": "src/Resolute/PikeObservedThreatPolicy.cs",
+      "bytes": 1483,
+      "sha256": "57977bb5826c764bed2fc58d5fdecb39fa4adb4999045521d74f73c703347999"
+    },
+    {
+      "path": "src/Resolute/PikeOffensiveEcmPolicy.cs",
+      "bytes": 3013,
+      "sha256": "8077975f58e8fed4199cdaf94e12e64f3ef5be407224a977d76b46ae774f0faa"
+    },
+    {
+      "path": "src/Resolute/PikeTerminalAccelerationPolicy.cs",
+      "bytes": 4130,
+      "sha256": "25c30706a1ce0662313d787d546a60950c289e0cc919e0dede63a1738d8fee35"
+    },
+    {
+      "path": "src/Resolute/PikeTerminalPass.cs",
+      "bytes": 3111,
+      "sha256": "a01ad6dbdf5fee9991aa1a2fe550e7bc34e675f8128f778cf484daf0aea87fb5"
+    },
+    {
+      "path": "src/Resolute/PikeTerrainClearancePolicy.cs",
+      "bytes": 3469,
+      "sha256": "c97d0ead884471c360798f3a955013e970d28006ed65c7d0332e428235868905"
+    },
+    {
+      "path": "src/Resolute/Plugin.cs",
+      "bytes": 21767,
+      "sha256": "522a17c56083999640e0553116799b3a5ffae18ea1e2258f7af431052744ab0b"
+    },
+    {
+      "path": "src/Resolute/Preview.cs",
+      "bytes": 8539,
+      "sha256": "4f11b15b629b0b92c0ae8f200f237a599ce054662ef6ccc46ee38b106d395360"
+    },
+    {
+      "path": "src/Resolute/RadarRecoveryPolicy.cs",
+      "bytes": 1432,
+      "sha256": "722a91d5f6c2a99538f3fff8ee1ae210cd5fe7b87518e1c373214c80d4b2a1ad"
+    },
+    {
+      "path": "src/Resolute/RcsJetLayout.cs",
+      "bytes": 981,
+      "sha256": "f5194203eea11f2ec5ba670d08fd2840873082622adbfe74baa2b0579f5dfe5f"
+    },
+    {
+      "path": "src/Resolute/RearMountFiringArcs.cs",
+      "bytes": 5824,
+      "sha256": "5988366ad2c55247d0214592fd19edd5ad1a5ab50b8230b286b386e18110bd08"
+    },
+    {
+      "path": "src/Resolute/ResoluteAmmoInventory.cs",
+      "bytes": 14416,
+      "sha256": "c09b230d0b1af45aa2ee296e9c5813318bb77f939a604c3812829d0abad59517"
+    },
+    {
+      "path": "src/Resolute/ResoluteCiwsAim.cs",
+      "bytes": 6066,
+      "sha256": "f74e95f8c5bc47b3fe8ac0e45f0071d6d91bedd89ffc80a4a821e5a04bc12b50"
+    },
+    {
+      "path": "src/Resolute/ResoluteCombatDiagnostics.cs",
+      "bytes": 6357,
+      "sha256": "9c7be453f1947d8ed9ca0e8152b5ac8ab4951a38255e44fd4c4f35b639d315f4"
+    },
+    {
+      "path": "src/Resolute/ResoluteCommandApi.cs",
+      "bytes": 36239,
+      "sha256": "f50e6c7fbe2136d022e3aeab76ef17e67233525592ffc78cd7d8ee11510e78da"
+    },
+    {
+      "path": "src/Resolute/ResoluteCommandHooks.cs",
+      "bytes": 8293,
+      "sha256": "ec8d5a86b7ad6d0fcd3739dcf47bd1ffd6294d6789b6f1616a629e3c35af64e3"
+    },
+    {
+      "path": "src/Resolute/ResoluteCommandIncome.cs",
+      "bytes": 14893,
+      "sha256": "f4f180f2d3efbd6d744fa400c913286e0c9e4a96bc3210af8d7bc80a63a8878f"
+    },
+    {
+      "path": "src/Resolute/ResoluteCommandMounts.cs",
+      "bytes": 3095,
+      "sha256": "9747a1861e2e03b703aa14f6356cc059b0aef9dffe275448e19363490da6ca87"
+    },
+    {
+      "path": "src/Resolute/ResoluteCommandSession.cs",
+      "bytes": 3365,
+      "sha256": "d3fe06eb8cb187d91c677b10b7cbdc27f2bfe40b1e835040c0b808fc2c19d5f1"
+    },
+    {
+      "path": "src/Resolute/ResoluteContactIdentity.cs",
+      "bytes": 1860,
+      "sha256": "e74ea327e7ee47f8d7b1da00747b84bbe47c7c33a7f2b2e86c6c86b89de2ee5e"
+    },
+    {
+      "path": "src/Resolute/ResoluteContactNumberLedger.cs",
+      "bytes": 548,
+      "sha256": "620e1d615dcf05b0e96f317933e339756b831545be2412d2095f1661c8685ed7"
+    },
+    {
+      "path": "src/Resolute/ResoluteDamageStatus.cs",
+      "bytes": 4941,
+      "sha256": "4c68b8018e173a78b4d81e39caa70d751cfcddceda266acae476cb673be6c41b"
+    },
+    {
+      "path": "src/Resolute/ResoluteDartLaunchClearance.cs",
+      "bytes": 3467,
+      "sha256": "d69ddfb73f68054a6b6fd1605a4cb36860498956da3433749a530934bd08e4ed"
+    },
+    {
+      "path": "src/Resolute/ResoluteDiagnostics.cs",
+      "bytes": 1055,
+      "sha256": "0e10660bdb9398def487e47347442818a0c6558aaffb044cf71c05418db910be"
+    },
+    {
+      "path": "src/Resolute/ResoluteEditorMassProperties.cs",
+      "bytes": 5007,
+      "sha256": "eb32366d7087ec9b1b4d0e021cc3bac03b2996a644444c1957da75d87ae431df"
+    },
+    {
+      "path": "src/Resolute/ResoluteEngagementDirector.cs",
+      "bytes": 26932,
+      "sha256": "9ed7b3fe913744cdd95b89829d812b80774cacfd46b7c06e56003a211a1b5368"
+    },
+    {
+      "path": "src/Resolute/ResoluteEngagementPolicy.cs",
+      "bytes": 5178,
+      "sha256": "3facd6f5bf2c8bdde9672158fa46a96421f87d0b01f92a08e75b6c04717ec7a6"
+    },
+    {
+      "path": "src/Resolute/ResoluteEsm.cs",
+      "bytes": 10624,
+      "sha256": "aad758fe379f5f13b7763df1e1825711080a715da7be35b43dc9c46fc4ffaeff"
+    },
+    {
+      "path": "src/Resolute/ResoluteHaloAperture.cs",
+      "bytes": 7998,
+      "sha256": "ed4de2f9ae7c3a6f0516f7fe71f23927de423085d8826849109e0f130ae3cf9a"
+    },
+    {
+      "path": "src/Resolute/ResoluteLaserAim.cs",
+      "bytes": 3885,
+      "sha256": "652eeb5f8c6bfb98eb63388e1ce7db85d52942c42ab6e3527c26e9ba68098189"
+    },
+    {
+      "path": "src/Resolute/ResoluteLiferafts.cs",
+      "bytes": 21576,
+      "sha256": "df281caa57a9fb2c46976fd685d589c0979fb1e82088282f51d61b1e231f4086"
+    },
+    {
+      "path": "src/Resolute/ResoluteMagazineCookoff.cs",
+      "bytes": 16216,
+      "sha256": "ca249b8d85b5d1d773dc8d6d217f65798cc1450233ddccb01c2f6e686047f278"
+    },
+    {
+      "path": "src/Resolute/ResoluteManualPikeOrders.cs",
+      "bytes": 1601,
+      "sha256": "24b8ffb48480a77b37d9075823967abbc2def6de8ddba2e0f16ea77446559c31"
+    },
+    {
+      "path": "src/Resolute/ResoluteNavalSupplyPickup.cs",
+      "bytes": 2898,
+      "sha256": "44def1b56afc568b8ccea21b0b1c96bcb32d8c5573bc62523efb35df5f09cebc"
+    },
+    {
+      "path": "src/Resolute/ResoluteNavigationCommands.cs",
+      "bytes": 20232,
+      "sha256": "1d91abb71c5a3322fafd682c681cee2d23377e0d2ee0f075ac8e9a46251a479c"
+    },
+    {
+      "path": "src/Resolute/ResoluteOffensiveEcm.cs",
+      "bytes": 17300,
+      "sha256": "f2785ad19ad2ebd746ab10607370b17e4a21eafedd1250956c0c2ce1808deb44"
+    },
+    {
+      "path": "src/Resolute/ResolutePikeMap.cs",
+      "bytes": 2137,
+      "sha256": "f688a6d73dc60e44d619e0fa288f017bb7bdc35306659c082793d963a227a8f2"
+    },
+    {
+      "path": "src/Resolute/ResolutePikeSearchZone.cs",
+      "bytes": 3257,
+      "sha256": "a77e9d4cf9a0e11b51508ab8726200f28590b1c9f6c017f50382b61fb460779b"
+    },
+    {
+      "path": "src/Resolute/ResoluteProtection.cs",
+      "bytes": 2478,
+      "sha256": "d9964c35579111c66bb3e45c1423500b2c1091353314df4b56af7764fda1a05e"
+    },
+    {
+      "path": "src/Resolute/ResoluteRaftPlacement.cs",
+      "bytes": 4227,
+      "sha256": "6c93a7e463d02bd2d7b039710242f2a2cc8e84e6b9ca5dea4e891e0253095c2e"
+    },
+    {
+      "path": "src/Resolute/ResoluteRailgunAim.cs",
+      "bytes": 3705,
+      "sha256": "8828b3128ff6a59813bbcdcd5b5f5b00678bc1b4f584f9e27d696226935c5ba3"
+    },
+    {
+      "path": "src/Resolute/ResoluteReplenishment.cs",
+      "bytes": 50086,
+      "sha256": "f47d5bf6c32ce2bf31d9169e930d803af4d8634f00b8338283afcc3770fc788b"
+    },
+    {
+      "path": "src/Resolute/ResoluteScrewSpeed.cs",
+      "bytes": 1402,
+      "sha256": "c0e5e35a644fd8130b98c032768a3fd18c64b5852416c0ce5734cd3d6ba3c1c1"
+    },
+    {
+      "path": "src/Resolute/ResoluteSensors.cs",
+      "bytes": 653,
+      "sha256": "d986be2e48f7c0ad1caa272e8df8bfa63aa7526ddfe033fd03a32b5616c4fef9"
+    },
+    {
+      "path": "src/Resolute/ResoluteShipEcm.cs",
+      "bytes": 6312,
+      "sha256": "bd68b66d29c2ea727ae8f477368c84180a401f1263d4cc9701c3ab4e82a6128f"
+    },
+    {
+      "path": "src/Resolute/ResoluteShockwave.cs",
+      "bytes": 9847,
+      "sha256": "867336f16ffe646a010e2e1c947e961c9adeadf50b3fc0e0337b1b89d6597474"
+    },
+    {
+      "path": "src/Resolute/ResoluteSpearPosition.cs",
+      "bytes": 8545,
+      "sha256": "2b6ce57570cb89126f0bc4049bc1e010c3137c3147f8be1448b52b9c00ffe40e"
+    },
+    {
+      "path": "src/Resolute/ResoluteStartupEngagement.cs",
+      "bytes": 1129,
+      "sha256": "bc83a0ef69880cb63d997f576a57f0f1e92d5d8dc8f3b562a3b1cca99cbe5a18"
+    },
+    {
+      "path": "src/Resolute/ResoluteStrikeAssessment.cs",
+      "bytes": 18707,
+      "sha256": "7c1b6fa0f62b614efa5c65771a8d769834a695ec120b6339cce2ffe711869ed3"
+    },
+    {
+      "path": "src/Resolute/ResoluteStrikeOrders.cs",
+      "bytes": 35181,
+      "sha256": "c466bd2f8e837d55522814ca5ce62556ab07bc49bd9b5f2b9bf8b950c950cde9"
+    },
+    {
+      "path": "src/Resolute/ResoluteStructuralRendering.cs",
+      "bytes": 14281,
+      "sha256": "5ee45d37168904ea1ff5f0bad196a50ccdfcfc50abc46ad0c12af872466e92fd"
+    },
+    {
+      "path": "src/Resolute/ResoluteSupplyAllocation.cs",
+      "bytes": 10850,
+      "sha256": "7056a528938b510cf2f70c8d21c25bd4094ed086972635c6a8c4de270344dbb1"
+    },
+    {
+      "path": "src/Resolute/ResoluteSupplyDefense.cs",
+      "bytes": 3815,
+      "sha256": "78a219621e8dc0a435ec8c77395631ee82c8495b1fbba252dc2d5877712a0d7a"
+    },
+    {
+      "path": "src/Resolute/ResoluteTurnHydrodynamics.cs",
+      "bytes": 2690,
+      "sha256": "282d83531656791caa9d1ac54f30f5e4a4adea0f4a076511082a6bc0d06b89ba"
+    },
+    {
+      "path": "src/Resolute/ScrewGeometry.cs",
+      "bytes": 4329,
+      "sha256": "e6150c7a8b43159c0452420d54179459ccc0a7f375f914ef6434ec1dcce8d062"
+    },
+    {
+      "path": "src/Resolute/ShipBehaviorTrial.cs",
+      "bytes": 23042,
+      "sha256": "8a67dc25cf57b36074178b81f8fadfa48b1929e73f2a8da115986902bc21cd9d"
+    },
+    {
+      "path": "src/Resolute/ShipFactory.cs",
+      "bytes": 70014,
+      "sha256": "71f6932d722b05d569e1e5f190cf0c315ce01d05c0f6b6704d4e1d464cf2cb3b"
+    },
+    {
+      "path": "src/Resolute/ShipRedoBaselineTrial.cs",
+      "bytes": 28054,
+      "sha256": "3b76a23df69a6f09ad7d23125a0f688b5d9b60f137fdc925d20ce78636292e2d"
+    },
+    {
+      "path": "src/Resolute/ShipSystemsTrial.cs",
+      "bytes": 30493,
+      "sha256": "68508653a1803708c84d870f68b2428cd635b6877d094de16d5d29e179864cac"
+    },
+    {
+      "path": "src/Resolute/SmokeTest.cs",
+      "bytes": 27793,
+      "sha256": "22ef6c25b0a0d76c38a8a10da66d51420aaf5e2286391affd378eae9352124f8"
+    },
+    {
+      "path": "src/Resolute/StartupLoadContext.cs",
+      "bytes": 3575,
+      "sha256": "b508668f930be416ceb590ffd7bc39c33d09582e087148e21529dba5a0999c73"
+    },
+    {
+      "path": "src/Resolute/StartupLoading.cs",
+      "bytes": 5805,
+      "sha256": "00d32cc4ae608c08eeddff5c4afdc73bdd92f77ff3edd14f5550c209443cb3ca"
+    },
+    {
+      "path": "src/Resolute/StartupRegistrationGate.cs",
+      "bytes": 1015,
+      "sha256": "d6389512d5683cfbd608b3943ad48043ba5e3ec9d48cd914eef4ad583ed0ded5"
+    },
+    {
+      "path": "src/Resolute/StructuralGeometry.cs",
+      "bytes": 137054,
+      "sha256": "11775af20272e96a72a3d3acc6f4847dd6b55e6a9869cb77a1678f9ef36bdf0a"
+    },
+    {
+      "path": "src/Resolute/StructuralHeightSeams.cs",
+      "bytes": 7830,
+      "sha256": "e24ee01c5bcb92e6cbfd22f111c3a401e1df5dead00a43b6786d03e882706e29"
+    },
+    {
+      "path": "src/Resolute/StructureReviewTrial.cs",
+      "bytes": 20691,
+      "sha256": "a0cee01d9c0ec3d8d6fcddf19b43034d76f981330192eb49ce62a05da73999cd"
+    },
+    {
+      "path": "src/Resolute/SurfaceDamageUv.cs",
+      "bytes": 7654,
+      "sha256": "2987e841b27891d251d4993fddda7a5b1add3bcb247c1c350573e95463b4360b"
+    },
+    {
+      "path": "src/Resolute/SurfaceFracture.cs",
+      "bytes": 43434,
+      "sha256": "23b97677a5dd369fea4bf98b289e5c3b6549d84bb2c36b9afef7a358585dc687"
+    },
+    {
+      "path": "src/Resolute/SurfaceNormals.cs",
+      "bytes": 5669,
+      "sha256": "2e0053e6d5f5700e71a55659181ced0d8258d67b7ecf51aba4ae21fd463c59e8"
+    },
+    {
+      "path": "src/Resolute/SurfacePaintStyle.cs",
+      "bytes": 33587,
+      "sha256": "740557614ece4252ddac96a861ab65cff99bcfb54a69eabbfdd4d503397377b7"
+    },
+    {
+      "path": "src/Resolute/SurfaceSalvoOrderPolicy.cs",
+      "bytes": 973,
+      "sha256": "b4f5f1e63f32840aa24506bc6713069b4e69cd92636ae905bf6f886176e788b6"
+    },
+    {
+      "path": "src/Resolute/SurfaceStyleTrial.cs",
+      "bytes": 9347,
+      "sha256": "ada1bc9049f231ebbeaea18941dfa0a0744b9189e69f365abb1d81c2fc3b1ffc"
+    },
+    {
+      "path": "src/Resolute/VariantTrial.cs",
+      "bytes": 6483,
+      "sha256": "3e9eec5f7ce5ace99a1ab05863ace83130e73f2bb708a97eb33b1377066c1dfd"
+    },
+    {
+      "path": "src/Resolute/VisualLoader.cs",
+      "bytes": 20264,
+      "sha256": "3f015b2ed18920ab8d6ba917ab07255a958520dac2da4cdfb3ad8243285ed313"
+    },
+    {
+      "path": "src/Resolute/VlsStructuralAttachments.cs",
+      "bytes": 35650,
+      "sha256": "5d54b8dbe28f6b139f8448b571d7fa31c32df615c2ef38edd2264fe1cab427cd"
+    }
+  ],
+  "buildScript": {
+    "path": "tools/build_plugin.ps1",
+    "sha256": "559c46856a72266df725b652b1e66ea536235ec5eebced4a6a6205b36d88b9ee"
+  }
+}
