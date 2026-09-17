@@ -17,12 +17,18 @@ namespace Resolute
 
         internal static int Reserve(int initialAmmo) => Math.Min(Math.Max(0, initialAmmo), ReserveWaves * SurfaceWaveSize);
 
+        internal static int Reserve(string key, int initialAmmo) => key == NaturalLanceFlight.Key
+            ? Math.Min(SurfaceWaveSize, Math.Max(0, initialAmmo) / 4) : Reserve(initialAmmo);
+
         internal static int Budget(bool surface, int ammo, int initialAmmo)
             => Budget(surface, ammo, initialAmmo, false, 1);
 
         internal static int Budget(bool surface, int ammo, int initialAmmo, bool selfDefense, int groups)
+            => Budget(null, surface, ammo, initialAmmo, selfDefense, groups);
+
+        internal static int Budget(string key, bool surface, int ammo, int initialAmmo, bool selfDefense, int groups)
         {
-            int spendable = Math.Max(0, ammo - (surface && !selfDefense ? Reserve(initialAmmo) : 0));
+            int spendable = Math.Max(0, ammo - (surface && !selfDefense ? Reserve(key, initialAmmo) : 0));
             return Math.Min(spendable, surface ? SurfaceWaveSize * Math.Max(1, Math.Min(groups, MaximumStrikeGroups)) : DefensiveBatchSize);
         }
 

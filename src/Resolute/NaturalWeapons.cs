@@ -71,9 +71,9 @@ namespace Resolute
                 if (loading != null) await loading.Step("Reading missile catalog");
                 string folder = Path.Combine(Path.GetDirectoryName(typeof(Plugin).Assembly.Location), "Assets", "Weapons");
                 var file = JsonConvert.DeserializeObject<WeaponFile>(File.ReadAllText(Path.Combine(folder, "weapons.json")));
-                if (file == null || file.schemaVersion != 1 || file.weapons == null || file.weapons.Length != 12 ||
-                    file.weapons.Select(w => w.key).Distinct().Count() != 12)
-                    throw new InvalidDataException("The original Resolute weapon catalog must contain twelve unique entries.");
+                if (file == null || file.schemaVersion != 1 || file.weapons == null || file.weapons.Length != 13 ||
+                    file.weapons.Select(w => w.key).Distinct().Count() != 13 || !file.weapons.Any(w => w.key == NaturalLanceFlight.Key))
+                    throw new InvalidDataException("The Resolute catalog must contain its twelve original entries and Lance.");
                 var missilePaint = new MissileVisuals(folder, encyclopedia);
                 visualBag = await VisualLoader.LoadFromFolderAsync(folder, "ResoluteWeapons", inactiveRoot, log, missilePaint.CreateMaterial, loading);
                 var pendingDefinitions = new Dictionary<string, MissileDefinition>();
@@ -261,16 +261,23 @@ namespace Resolute
             // Proximity and impact fusing are independent. Native unfused
             // missiles deliberately ricochet from terrain after a missed shot.
             Set(missile, "impactFuse", true);
-            Set(missile, "impactFuseDelay", 0f);
-            Set(missile, "pierceDamage", source.Surface ? 500f : 120f);
+            float pierce = source.key == NaturalLanceFlight.Key
+                ? source.Number("WarheadData", "PierceDamage", source.Surface ? 500f : 120f)
+                : source.Surface ? 500f : 120f;
+            float impactFuseDelay = source.key == NaturalLanceFlight.Key
+                ? Mathf.Max(0f, source.Number("WarheadData", "ImpactFuseDelay", 0f)) : 0f;
+            Set(missile, "impactFuseDelay", impactFuseDelay);
+            Set(missile, "pierceDamage", pierce);
             info.blastDamage = blast;
-            info.pierceDamage = source.Surface ? 500f : 120f;
+            info.pierceDamage = pierce;
             if (source.key == "rsl_cruise" || source.key == "rsl_ashm")
                 NaturalSpearBooster.Configure(missile, source, donor.unitPrefab.GetComponent<Missile>(), encyclopedia);
-            if (source.key == "rsl_cruise")
+            if (source.key == NaturalLanceFlight.Key)
+                NaturalLanceFlight.ConfigurePropulsion(missile, source, encyclopedia);
+            else if (source.key == "rsl_cruise")
                 NaturalSpearFlight.Configure(missile, source, donor.unitPrefab.GetComponent<Missile>());
             else ConfigureMotors(missile, source, donor.unitPrefab.GetComponent<Missile>());
-            NaturalWeaponEffects.Configure(missile, source);
+            if (source.key != NaturalLanceFlight.Key) NaturalWeaponEffects.Configure(missile, source);
             foreach (LODGroup lod in prefab.GetComponentsInChildren<LODGroup>(true)) Object.DestroyImmediate(lod);
             foreach (MeshRenderer renderer in prefab.GetComponentsInChildren<MeshRenderer>(true))
                 if (!NaturalSpearBooster.OwnsSurfaceBoosterVisual(missile, renderer.transform)) renderer.enabled = false;
@@ -296,12 +303,24 @@ namespace Resolute
             rigidbody.mass = source.massKg;
             rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             var body = new GameObject("OriginalWeaponGeometry"); body.transform.SetParent(prefab.transform, false);
-            GameObject launch = CopyVisual(source.stages["launch"].node, body.transform);
-            GameObject flight = CopyVisual(source.stages["flight"].node, body.transform);
+            GameObject launch, flight;
+            if (source.key == NaturalLanceFlight.Key)
+            {
+                var presentation = LanceVisuals.Attach(prefab, encyclopedia,
+                    Path.Combine(Path.GetDirectoryName(typeof(Plugin).Assembly.Location), "Assets", "Lance"));
+                presentation.BindBooster(prefab.GetComponent<NaturalLanceFlight>().Booster);
+                launch = new GameObject("LancePhaseLaunch"); launch.transform.SetParent(body.transform, false);
+                flight = new GameObject("LancePhaseCruise"); flight.transform.SetParent(body.transform, false);
+            }
+            else
+            {
+                launch = CopyVisual(source.stages["launch"].node, body.transform);
+                flight = CopyVisual(source.stages["flight"].node, body.transform);
+            }
             launch.SetActive(true); flight.SetActive(false);
             var phase = prefab.AddComponent<NaturalWeaponPhase>();
             phase.LaunchModel = launch; phase.FlightModel = flight; phase.SwitchSeconds = source.switchSeconds;
-            NaturalFinDeployment.Configure(phase, source.key, visualBag.transform);
+            if (source.key != NaturalLanceFlight.Key) NaturalFinDeployment.Configure(phase, source.key, visualBag.transform);
             phase.Lifetime = source.maxFlightTime > 0 ? source.maxFlightTime : Mathf.Max(60f, source.maxRangeM / Mathf.Max(1f, source.speedMps) * 1.3f);
             if (source.key == "rsl_ashm")
             {
@@ -313,7 +332,7 @@ namespace Resolute
             phase.TerminalSpeed = source.Guidance("TerminalVelocity", 0f) * 0.514444444f;
             phase.TerminalRange = source.Guidance("TerminalApproachDist", 0f) * 1852f;
             phase.SeaSkim = source.key == "rsl_ashm" || source.key == "rsl_cruise";
-            phase.SurfaceCapable = phase.SeaSkim;
+            phase.SurfaceCapable = phase.SeaSkim || source.key == NaturalLanceFlight.Key;
             phase.NativeCruisePipeline = source.key == "rsl_cruise";
             phase.NativePrefabDonor = donor.jsonKey;
             // Every tangible custom missile has a physical capsule. Its edge
@@ -323,7 +342,13 @@ namespace Resolute
             phase.ContactFuse = !source.Underwater && !source.Carrier;
             phase.CruiseAltitude = source.Guidance("SeaSkimmingAlt", 40f) * 0.3048f;
             phase.TerminalAltitude = source.Guidance("TerminalAlt", 30f) * 0.3048f;
-            NaturalWeaponEffects.FitNozzles(missile);
+            if (source.key == NaturalLanceFlight.Key)
+            {
+                phase.SwitchSeconds = 0f;
+                phase.NativeCruisePipeline = true;
+                phase.Lifetime = 900f;
+            }
+            else NaturalWeaponEffects.FitNozzles(missile);
             ConfigureSeeker(prefab, missile, source, encyclopedia);
             if (source.key == "rsl_pd" || source.key == "rsl_mrsam") NaturalDartLaunch.Configure(missile, encyclopedia);
             NaturalLoftGuidance.Configure(prefab, source);
@@ -331,7 +356,7 @@ namespace Resolute
             // needs the authored ARH/terminal-boost/evasion adapter below.
             if (source.key == "rsl_ashm") NaturalCruiseTactics.Configure(prefab, source, encyclopedia);
             if (source.key == NaturalPikeCountermeasures.WeaponKey) NaturalPikeCountermeasures.Configure(prefab, source, encyclopedia);
-            NaturalWeaponEffects.ConfigureAfterburner(missile, source, encyclopedia);
+            if (source.key != NaturalLanceFlight.Key) NaturalWeaponEffects.ConfigureAfterburner(missile, source, encyclopedia);
             if (source.key == "rsl_bmd" || source.key == "rsl_bmd_exo") NaturalReactionControl.Configure(prefab, source);
             ConfigureIdentities(prefab, source.key);
             Object.DontDestroyOnLoad(definition); Object.DontDestroyOnLoad(info);
@@ -365,7 +390,7 @@ namespace Resolute
             return new TargetRequirements {
                 minRange = source.minRangeM, maxRange = source.key == "rsl_bmd" ? NaturalBallisticSelection.TerminalSelectionRange : source.maxRangeM,
                 minAltitude = source.Surface ? -25f : Mathf.Max(0f, minAltitude),
-                maxAltitude = source.Surface ? 250f : maxAltitude,
+                maxAltitude = source.key == NaturalLanceFlight.Key ? 10000f : source.Surface ? 250f : maxAltitude,
                 maxSpeed = source.Surface ? 60f : source.Guidance("MaxAttackVelocity", 12000f) * 0.514444444f,
                 lineOfSight = source.key == "rsl_pd", minAlignment = -1f,
                 minValue = source.sourceRole == "BMD" ? NaturalBallisticSelection.MinimumValue : 0f,
@@ -379,6 +404,7 @@ namespace Resolute
             {
                 case "rsl_ashm": return "A heavy, supersonic anti-ship missile designed to overwhelm fleet defenses through coordinated attacks. Pike cruises at low altitude before accelerating for a sea-skimming terminal approach. An active radar seeker, shared targeting information and electronic countermeasures allow groups of missiles to search for ships and distribute their attacks across a formation.";
                 case "rsl_cruise": return "A long-range cruise missile designed for precision strikes against ground installations, vehicles and ships. Spear combines inertial navigation with terrain-following flight and optical terminal guidance, approaching at low altitude before striking its target with a conventional explosive warhead.";
+                case "rsl_scramjet": return "A hypersonic strike missile designed to engage moving ships and stationary ground targets. Lance climbs under rocket power before separating its booster and accelerating through a high-altitude approach. Datalink updates and an active radar seeker guide attacks on tracked targets, while inertial guidance supports strikes against fixed land coordinates. Paired evasive maneuvers diminish as the missile converges on its final approach.";
                 case "rsl_lrsam": return "An active radar-guided, long-range surface-to-air missile designed to protect fleets against aircraft and incoming missiles. Sentinel uses a two-stage rocket motor and a lofted flight path to reach distant targets, receiving datalink updates before transitioning to its own radar seeker for terminal guidance.";
                 case "rsl_mrsam": return "An active radar-guided, medium-range surface-to-air missile designed for rapid interception of aircraft and incoming missiles. Ward is ejected vertically before turning toward the target and igniting its motor. Datalink guidance supports the approach, while its onboard radar guides the final interception.";
                 case "rsl_bastion": return "An active radar-guided, long-range surface-to-air missile designed to defend fleets against aircraft and incoming missiles. Bastion combines high speed with a lofted flight path to extend its reach, using datalink updates during the approach before its onboard radar takes over for the final interception.";
@@ -548,7 +574,7 @@ namespace Resolute
                             Mathf.Max(2000f, source.Guidance("SeekerActiveRange", 14f) * 1852f));
                     Set(seeker, "jamTolerance", source.Guidance("AntiJammerBonus", 0.6f));
                     Set(seeker, "selfDestructAtSpeed", 60f);
-                    if (source.key == "rsl_ashm")
+                    if (source.key == "rsl_ashm" || source.key == NaturalLanceFlight.Key)
                     {
                         // ARH has an independent pre-terminal jink. Pike's
                         // prescribed swerve begins only after group release;
@@ -775,7 +801,12 @@ namespace Resolute
             missile.rb.MovePosition(transform.position);
             IDamageable damageable = collision.collider.GetComponent<IDamageable>();
             if (damageable != null && missile.IsArmed() &&
-                (bool)PenetrateObject.Invoke(missile, new object[] { damageable, contact.point, contact.normal })) return;
+                (bool)PenetrateObject.Invoke(missile, new object[] { damageable, contact.point, contact.normal }))
+            {
+                if (missile.definition?.jsonKey == NaturalLanceFlight.Key && !missile.rb.isKinematic)
+                    missile.rb.velocity = Vector3.zero;
+                return;
+            }
             bool water = contact.point.y < Datum.LocalSeaY;
             bool terrain = !water && collision.collider.sharedMaterial == GameAssets.i.terrainMaterial;
             missile.Detonate(contact.normal, !water && !terrain, terrain);

@@ -369,6 +369,7 @@ namespace Resolute
 
         internal static float NativeIntensity(Missile target)
         {
+            if (NaturalLanceFlight.Try(target, out var lance)) return lance.EcmIntensity;
             NaturalPikeCountermeasures value = Find(target);
             if (value == null || !value.isActiveAndEnabled) return 0f;
             // Offensive ECM uses native Unit.Jam. Do not also subtract the old

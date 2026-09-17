@@ -11,7 +11,7 @@ namespace Resolute
     internal static class NaturalMissileTargeting
     {
         private static readonly string[] Keys = { "rsl_ashm", "rsl_cruise", "rsl_lrsam", "rsl_mrsam",
-            "rsl_bastion", "rsl_bmd", "rsl_bmd_exo", "rsl_pd" };
+            "rsl_bastion", "rsl_bmd", "rsl_bmd_exo", "rsl_pd", NaturalLanceFlight.Key };
         private static readonly FieldInfo LaunchPoints = AccessTools.Field(typeof(MissileLauncher), "launchTransforms");
         private static readonly FieldInfo CurrentCell = AccessTools.Field(typeof(MissileLauncher), "currentCell");
         private static readonly FieldInfo LaunchPoint = AccessTools.Field(typeof(MissileLauncher), "launchTransform");
@@ -33,6 +33,7 @@ namespace Resolute
             switch (key)
             {
                 case "rsl_ashm": return target is Ship;
+                case NaturalLanceFlight.Key: return target is Ship || StationaryGroundTarget(target);
                 case "rsl_cruise": return target is Ship || target is Building || target is GroundVehicle;
                 case "rsl_bmd": case "rsl_bmd_exo": return NaturalBallisticSelection.IsEligible(target);
                 case "rsl_lrsam": case "rsl_mrsam": case "rsl_bastion": case "rsl_pd":
@@ -43,6 +44,14 @@ namespace Resolute
 
         internal static bool ManualRoleAllows(string key, Unit target) =>
             key == "rsl_bmd" || key == "rsl_bmd_exo" ? NaturalBallisticSelection.IsCompatible(target) : RoleAllows(key, target);
+
+        private static bool StationaryGroundTarget(Unit target)
+        {
+            if (target is Building) return true;
+            if (!(target is GroundVehicle)) return false;
+            float speed = target.rb != null ? Mathf.Max(Mathf.Abs(target.speed), target.rb.velocity.magnitude) : Mathf.Abs(target.speed);
+            return Finite(speed) && speed <= 1f;
+        }
 
         internal static bool Evaluate(WeaponInfo info, Unit owner, Unit target, Vector3 launchPosition,
             bool preference, out string reason, bool committedShot = false)
@@ -77,7 +86,7 @@ namespace Resolute
             // instead of cancelling every queued shot as that track ages.
             // Specialized T/X retain their existing gate.
             float trackTolerance = committedShot && (NaturalWeapons.UsesNativeAirDefenseProfile(key) ||
-                key == "rsl_ashm" || key == "rsl_cruise") ? 2000f : committedShot && key == "rsl_pd" ? 500f : 100f;
+                key == "rsl_ashm" || key == "rsl_cruise" || key == NaturalLanceFlight.Key) ? 2000f : committedShot && key == "rsl_pd" ? 500f : 100f;
             if (!owner.NetworkHQ.TryGetKnownPosition(target, out known) ||
                 !owner.NetworkHQ.IsTargetPositionAccurate(target, trackTolerance)) return Reject("unusable-datalink-track", out reason);
 
@@ -100,8 +109,8 @@ namespace Resolute
             if ((infrared || requirements.lineOfSight) && !target.LineOfSight(launchPosition, 1000f))
                 return Reject("no-launch-line-of-sight", out reason);
             if (requirements.minRadar > 0f && !target.HasRadarEmission()) return Reject("no-radar-emission", out reason);
-            if (preference && key == "rsl_cruise" && target is Ship && !ResoluteEngagementDirector.Owns(owner) && PikeAvailable(owner, target))
-                return Reject("naval-target-reserved-for-pike", out reason);
+            if (preference && key == "rsl_cruise" && target is Ship && !ResoluteEngagementDirector.Owns(owner) && AntiShipAvailable(owner, target))
+                return Reject("naval-target-reserved-for-antiship-battery", out reason);
             return true;
         }
 
@@ -145,7 +154,7 @@ namespace Resolute
                 // Recheck the commanded type at the physical firing boundary,
                 // but never re-enter automatic phase/value/range selection.
                 string key = Key(launcher.info);
-                return target == null && (key == "rsl_ashm" || key == "rsl_cruise") ||
+                return target == null && (key == "rsl_ashm" || key == "rsl_cruise" || key == NaturalLanceFlight.Key) ||
                     target != null && !target.disabled && ManualRoleAllows(key, target) ||
                     Reject("excluded-manual-target-role", out reason);
             }
@@ -166,13 +175,14 @@ namespace Resolute
             return true;
         }
 
-        private static bool PikeAvailable(Unit owner, Unit target)
+        private static bool AntiShipAvailable(Unit owner, Unit target)
         {
             Ship ship = owner as Ship;
             if (ship == null) return false;
             foreach (WeaponStation station in ship.weaponStations)
             {
-                if (Key(station.WeaponInfo) != "rsl_ashm") continue;
+                string key = Key(station.WeaponInfo);
+                if (key != "rsl_ashm" && key != NaturalLanceFlight.Key) continue;
                 foreach (Weapon weapon in station.Weapons)
                 {
                     MissileLauncher launcher = weapon as MissileLauncher;

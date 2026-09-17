@@ -177,7 +177,7 @@ namespace Resolute
         {
             flight = float.PositiveInfinity; score = 0f;
             if (!ResoluteCommandApi.AllowAutomatic(ship, battery.Stations.FirstOrDefault(), target)) return false;
-            if (ResoluteEngagementPolicy.Budget(battery.Surface, battery.Ammo, battery.InitialAmmo,
+            if (ResoluteEngagementPolicy.Budget(battery.Key, battery.Surface, battery.Ammo, battery.InitialAmmo,
                 assessment != null && assessment.SelfDefense(target), 1) <= 0 ||
                 !NaturalMissileTargeting.RoleAllows(battery.Key, target)) return false;
             WeaponStation representative = EnsureRepresentative(battery, readOnly);
@@ -264,7 +264,7 @@ namespace Resolute
             assessment.Tick();
             // Reserve eligibility belongs to the actual selected threat. This
             // upper budget only permits examining an emergency opportunity.
-            int budget = ResoluteEngagementPolicy.Budget(battery.Surface, battery.Ammo, battery.InitialAmmo, true,
+            int budget = ResoluteEngagementPolicy.Budget(battery.Key, battery.Surface, battery.Ammo, battery.InitialAmmo, true,
                 battery.Key == "rsl_ashm" ? ResoluteEngagementPolicy.MaximumStrikeGroups : 1);
             string held = budget <= 0 ? "empty-battery" : null;
             if (battery.Surface)
@@ -292,7 +292,7 @@ namespace Resolute
                         if (!assessment.TrackUsable(target, track) || !assessment.MayReassess(target)) continue;
                         demand = assessment.Demand(target, track, battery.Info.CalcAttacksNeeded(target), groups);
                         demand = Math.Min(demand, Mathf.FloorToInt(target.definition.value / Mathf.Max(.01f, battery.Info.costPerRound)));
-                        if (ResoluteEngagementPolicy.Budget(true, battery.Ammo, battery.InitialAmmo, emergency, groups) <= 0) continue;
+                        if (ResoluteEngagementPolicy.Budget(battery.Key, true, battery.Ammo, battery.InitialAmmo, emergency, groups) <= 0) continue;
                     }
                     else
                     {
@@ -332,7 +332,7 @@ namespace Resolute
                 // Emergency release does not spend the reserve on unrelated
                 // ships merely because they are near the active attacker.
                 if (battery.Surface && primary != null && primary.Emergency && !candidate.Emergency &&
-                    battery.Ammo <= ResoluteEngagementPolicy.Reserve(battery.InitialAmmo)) continue;
+                    battery.Ammo <= ResoluteEngagementPolicy.Reserve(battery.Key, battery.InitialAmmo)) continue;
                 detailedChecks++;
                 if (ChooseBattery(candidate.Target, candidate.Track, controller) != battery) continue;
                 if (primary == null)
@@ -340,7 +340,7 @@ namespace Resolute
                     primary = candidate;
                     if (battery.Surface)
                     {
-                        budget = Math.Min(budget, ResoluteEngagementPolicy.Budget(true, battery.Ammo,
+                        budget = Math.Min(budget, ResoluteEngagementPolicy.Budget(battery.Key, true, battery.Ammo,
                             battery.InitialAmmo, primary.Emergency, primary.Groups));
                         budget = Math.Min(budget, Math.Max(0, primary.Groups * ResoluteEngagementPolicy.SurfaceWaveSize -
                             assessment.GroupActiveCount(primary.Target)));
@@ -355,7 +355,7 @@ namespace Resolute
             // expendable stock, but only active threats may consume reserve.
             if (battery.Surface)
             {
-                int routine = Math.Max(0, battery.Ammo - ResoluteEngagementPolicy.Reserve(battery.InitialAmmo));
+                int routine = Math.Max(0, battery.Ammo - ResoluteEngagementPolicy.Reserve(battery.Key, battery.InitialAmmo));
                 for (int i = 0; i < candidates.Count; i++)
                     if (!candidates[i].Emergency) { grants[i] = Math.Min(grants[i], routine); routine -= grants[i]; }
             }
@@ -391,7 +391,7 @@ namespace Resolute
             {
                 if (history.Count >= 32) history.Dequeue();
                 history.Enqueue(new { time = Time.timeSinceLevelLoad, weapon = battery.Key, ammo = battery.Ammo,
-                    reserve = battery.Surface ? ResoluteEngagementPolicy.Reserve(battery.InitialAmmo) : 0,
+                    reserve = battery.Surface ? ResoluteEngagementPolicy.Reserve(battery.Key, battery.InitialAmmo) : 0,
                     reason = total > 0 ? (primary != null && primary.Emergency ? "active-threat-defense" : "balanced-native-plan") :
                         held ?? "covered-reserved-or-preferred-other-battery", shots = total, targets = admitted });
             }
@@ -413,7 +413,7 @@ namespace Resolute
         internal object Capture() => new { registered, PlansReviewed, PlansAdmitted, ShotsAdmitted,
             nextSurfaceReview, surfaceWaveOutstanding = registered && SurfaceOutstanding(null),
             batteries = batteries.Select(b => new { weapon = b.Key, ammo = b.Ammo, initialAmmo = b.InitialAmmo,
-                reserve = b.Surface ? ResoluteEngagementPolicy.Reserve(b.InitialAmmo) : 0, busy = Busy(b) }).ToArray(),
+                reserve = b.Surface ? ResoluteEngagementPolicy.Reserve(b.Key, b.InitialAmmo) : 0, busy = Busy(b) }).ToArray(),
             strikeAssessment = assessment?.Capture(), decisions = history.ToArray() };
     }
 

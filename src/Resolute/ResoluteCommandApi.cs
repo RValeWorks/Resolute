@@ -35,8 +35,9 @@ namespace Resolute
         public static bool TryGetMissilePositionOrder(Ship ship, Missile missile, out GlobalPosition position)
         {
             position = default(GlobalPosition);
-            if (!CanCommand(ship, out _) || missile == null || missile.disabled || missile.owner != ship ||
-                missile.definition?.jsonKey != "rsl_cruise") return false;
+            if (!CanCommand(ship, out _) || missile == null || missile.disabled || missile.owner != ship) return false;
+            if (missile.definition?.jsonKey == NaturalLanceFlight.Key) return ResoluteLancePosition.TryGetPoint(missile, out position);
+            if (missile.definition?.jsonKey != "rsl_cruise") return false;
             var seeker = missile.GetComponent<OpticalSeekerCruiseMissile>();
             if (!ResoluteSpearPosition.TryGet(seeker, out var order)) return false;
             position = order.Point;
@@ -65,7 +66,12 @@ namespace Resolute
             if (fitted == null) { reason = "That weapon is not fitted."; return false; }
             string registered = NaturalMissileTargeting.Key(fitted.WeaponInfo);
             if (registered != null && !NaturalMissileTargeting.ManualRoleAllows(registered, target))
-            { reason = key == "rsl_ashm" ? "Pike can only be ordered against surface ships." : fitted.WeaponInfo.weaponName + " cannot engage that target type."; return false; }
+            {
+                reason = key == "rsl_ashm" ? "Pike can only be ordered against surface ships." :
+                    key == NaturalLanceFlight.Key ? "Lance can engage ships and stationary ground targets." :
+                    fitted.WeaponInfo.weaponName + " cannot engage that target type.";
+                return false;
+            }
             // Friendly targets are permitted. Unseen hostile units are not
             // revealed by this hook; the native map/track supplies the contact.
             GlobalPosition known;
@@ -96,11 +102,11 @@ namespace Resolute
         {
             resolved = position;
             if (!CanCommand(ship, out reason)) return false;
-            if (key != "rsl_ashm" && key != "rsl_cruise") { reason = "This weapon needs a target. Right-click a compatible contact."; return false; }
+            if (key != "rsl_ashm" && key != "rsl_cruise" && key != NaturalLanceFlight.Key) { reason = "This weapon needs a target. Right-click a compatible contact."; return false; }
             if (!ResoluteNavigationCommands.Finite(position.x) || !ResoluteNavigationCommands.Finite(position.y) || !ResoluteNavigationCommands.Finite(position.z))
             { reason = "The selected position is invalid."; return false; }
-            if (key == "rsl_cruise" && !ResoluteSpearPosition.TryResolveLand(position, out resolved))
-            { reason = "Spear needs a land position. Select a point on land."; return false; }
+            if ((key == "rsl_cruise" || key == NaturalLanceFlight.Key) && !ResoluteSpearPosition.TryResolveLand(position, out resolved))
+            { reason = (key == NaturalLanceFlight.Key ? "Lance" : "Spear") + " needs a land position. Select a point on land."; return false; }
             reason = null;
             return true;
         }
@@ -333,6 +339,8 @@ namespace Resolute
             {
                 if (firing.Key == "rsl_cruise" && firing.Position.HasValue)
                     ResoluteSpearPosition.Register(missile, firing.Position.Value);
+                else if (firing.Key == NaturalLanceFlight.Key && firing.Position.HasValue)
+                    ResoluteLancePosition.Register(missile, firing.Position.Value);
                 else if (firing.Key == "rsl_ashm")
                 {
                     if (firing.Position.HasValue) ResoluteManualPikeOrders.RegisterLaunchedPosition(ship, missile, firing.Position.Value, firing.Id);

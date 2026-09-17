@@ -68,7 +68,8 @@ namespace Resolute
         // Shared by the existing exact-layout native CombatAI / defensive
         // turret predicate patches. All other native suitability checks stay.
         internal static bool IsTargetOrObservedIncoming(Missile missile, Unit defender) =>
-            NaturalPikeObservedThreat.IsTargetOrObservedIncoming(missile, defender) || IsIncoming(missile, defender as Ship);
+            NaturalPikeObservedThreat.IsTargetOrObservedIncoming(missile, defender) ||
+            ResoluteLancePosition.IsObservedIncoming(missile, defender) || IsIncoming(missile, defender as Ship);
         internal static bool IsNotTargetOrObservedIncoming(Missile missile, Unit defender) =>
             !IsTargetOrObservedIncoming(missile, defender);
     }
